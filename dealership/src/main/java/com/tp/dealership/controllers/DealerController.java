@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class DealerController {
@@ -59,8 +60,8 @@ public class DealerController {
         return ResponseEntity.ok("Successful Delete");
     }
 
-    @GetMapping("/searchbyfilters")
-    public ResponseEntity filterSearch(@RequestBody SearchfilterParameters toSearch){
+    @PostMapping("/searchbyfilters")
+    public ResponseEntity filterSearch(@RequestBody SearchFilterParameters toSearch){
         List<Car> toReturn = null;
         try {
             toReturn = service.filterSearch(toSearch);

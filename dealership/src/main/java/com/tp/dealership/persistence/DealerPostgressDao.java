@@ -1,6 +1,6 @@
 package com.tp.dealership.persistence;
 
-import com.tp.dealership.controllers.SearchfilterParameters;
+import com.tp.dealership.controllers.SearchFilterParameters;
 import com.tp.dealership.exceptions.InvalidIdException;
 import com.tp.dealership.models.Car;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,16 +74,16 @@ public class DealerPostgressDao implements DealerDao{
     }
 
     @Override
-    public List<Car> filterSearch(SearchfilterParameters toSearch) {
+    public List<Car> filterSearch(SearchFilterParameters toSearch) {
         List<Car> collection = template.query("SELECT id, make, model, miles, color, year, owners, passinspec, vin, price\n" +
-                "\tFROM public.\"car collection\" WHERE " + filteredInput(toSearch) +";", new CarMapper());
+                "\tFROM public.\"car collection\" " + filteredInput(toSearch), new CarMapper());
 
         return collection;
     }
 
 
     //helper method that builds a string for the where clause of the sql for filterSearch
-    private String filteredInput(SearchfilterParameters toSearch) {
+    private String filteredInput(SearchFilterParameters toSearch) {
         String toReturn = "";
         Boolean needsAnd  = true;
         if(toSearch.getYearStart() != null || toSearch.getYearEnd() != null){
@@ -93,7 +93,7 @@ public class DealerPostgressDao implements DealerDao{
             else{
                 toReturn = toReturn + ("year >= " + toSearch.getYearStart());
             }
-            toReturn = toReturn + (" AND ");
+            toReturn += " AND ";
             if(toSearch.getYearEnd() == null){
                 toReturn = toReturn + ("year <= 2020");
             }
@@ -105,7 +105,7 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getPriceStart() != null || toSearch.getPriceEnd() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn += " AND ";
             }
             if(toSearch.getPriceStart() == null){
                 toReturn = toReturn + ("price > 0");
@@ -113,7 +113,7 @@ public class DealerPostgressDao implements DealerDao{
             else{
                 toReturn = toReturn + ("price >= " + toSearch.getPriceStart());
             }
-            toReturn.concat(" AND ");
+            toReturn += " AND ";
             if(toSearch.getPriceEnd() == null){
                 toReturn = toReturn + ("price <= 1000000");
             }
@@ -125,7 +125,7 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getMake() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn += " AND ";
             }
             toReturn = toReturn + ("make = '" + toSearch.getMake() + "'");
             needsAnd = false;
@@ -133,7 +133,7 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getModel() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn +=" AND ";
             }
             toReturn = toReturn + ("model = '" + toSearch.getModel() + "'");
             needsAnd = false;
@@ -141,7 +141,7 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getMiles() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn +=" AND ";
             }
             toReturn = toReturn + ("miles < " + toSearch.getMiles());
             needsAnd = false;
@@ -149,7 +149,7 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getColor() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn += " AND ";
             }
             toReturn = toReturn + ("color = '" + toSearch.getColor() +"'");
             needsAnd = false;
@@ -157,7 +157,7 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getOwners() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn += " AND ";
             }
             toReturn = toReturn + ("owners <= " + toSearch.getOwners());
             needsAnd = false;
@@ -165,11 +165,16 @@ public class DealerPostgressDao implements DealerDao{
 
         if(toSearch.getPassinspec() != null){
             if(!needsAnd){
-                toReturn = toReturn + (" AND ");
+                toReturn += " AND ";
             }
             toReturn = toReturn + ("passinspec = " + toSearch.getPassinspec());
             needsAnd = false;
         }//handles passinspec
+
+        //only inserts where and and semicolon if any parameters are available
+        if(!toReturn.isEmpty()){
+            toReturn = "WHERE " + toReturn + ";";
+        }
 
         return toReturn;
     }

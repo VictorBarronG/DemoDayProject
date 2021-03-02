@@ -1,0 +1,12 @@
+<input type="text" [(ngModel)]="make" placeholder="Make">
+<input type="text" [(ngModel)]="model" placeholder="Model"> <br>
+<input type="number" [(ngModel)]="miles" placeholder="Miles">
+<input type="text" [(ngModel)]="color" placeholder="color"> <br>
+<input type="number" [(ngModel)]="yearStart" placeholder="Year Start">
+<input type="number" [(ngModel)]="yearEnd" placeholder="Year End"> <br>
+<span>Did it pass inspections?</span><input type="checkbox" [(ngModel)]="passinspec" checked="true"><br>
+<input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
+<input type="number" [(ngModel)]="priceStart" placeholder="Price From">
+<input type="number" [(ngModel)]="priceEnd" placeholder="Price To">
+<button (click)="searchFilter()">Search</button>
+<app-car *ngFor="let car of cars" [car]="car"> </app-car>

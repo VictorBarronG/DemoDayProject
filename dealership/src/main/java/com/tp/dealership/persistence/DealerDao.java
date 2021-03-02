@@ -1,6 +1,6 @@
 package com.tp.dealership.persistence;
 
-import com.tp.dealership.controllers.SearchfilterParameters;
+import com.tp.dealership.controllers.SearchFilterParameters;
 import com.tp.dealership.exceptions.InvalidIdException;
 import com.tp.dealership.models.Car;
 
@@ -15,5 +15,5 @@ public interface DealerDao {
 
     public Car getById(Integer id) throws InvalidIdException;
 
-    public List<Car> filterSearch(SearchfilterParameters toSearch);
+    public List<Car> filterSearch(SearchFilterParameters toSearch);
 }

@@ -1,15 +1,13 @@
 package com.tp.dealership.services;
 
-import com.tp.dealership.controllers.SearchfilterParameters;
+import com.tp.dealership.controllers.SearchFilterParameters;
 import com.tp.dealership.exceptions.InvalidIdException;
 import com.tp.dealership.exceptions.InvalidInputException;
 import com.tp.dealership.models.Car;
 import com.tp.dealership.persistence.DealerDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Component
@@ -68,14 +66,14 @@ public class DealerService {
 
     //VALIDATE ALL ENTRIES ARE WITHIN RANGE AND NOT EMPTY AND CAST STRINGS TO LOWERCASE
     //dont have to worry about Strings being empty because if its null it wont search that specific one and this will have a drop down on user side
-    public List<Car> filterSearch(SearchfilterParameters toSearch) throws InvalidInputException {
+    public List<Car> filterSearch(SearchFilterParameters toSearch) throws InvalidInputException {
         if(toSearch.getYearStart() != null){
             if(!(toSearch.getYearStart() > 1950 && toSearch.getYearStart() < 2020)){throw new InvalidInputException("Start year needs to be in range of 1992 to 2020.");}
         }
         if(toSearch.getYearEnd() != null){
             if(!(toSearch.getYearStart() > 1950 && toSearch.getYearStart() < 2020)){throw new InvalidInputException("End year needs to be in range of 1992 to 2020");}
         }
-        if(toSearch.getYearStart() != null || toSearch.getYearEnd() != null){
+        if(toSearch.getYearStart() != null && toSearch.getYearEnd() != null){
             if(toSearch.getYearStart() > toSearch.getYearEnd()){throw new InvalidInputException("Year range is invalid.");}
         }
         if(toSearch.getMake() != null){
@@ -93,7 +91,7 @@ public class DealerService {
         if(toSearch.getPriceEnd() != null){
             if(toSearch.getPriceEnd() < 0){throw new InvalidInputException("Price is not valid entry.");}
         }
-        if(toSearch.getPriceEnd() != null || toSearch.getPriceStart() != null){
+        if(toSearch.getPriceEnd() != null && toSearch.getPriceStart() != null){
             if(toSearch.getPriceEnd() < toSearch.getPriceStart()){throw new InvalidInputException("Price range is invalid.");}
         }
 

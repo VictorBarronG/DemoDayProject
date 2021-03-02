@@ -1,6 +1,6 @@
 package com.tp.dealership.controllers;
 
-public class SearchfilterParameters {
+public class SearchFilterParameters {
     Integer yearStart; //range year start
     Integer yearEnd;   //range year end
     String make;
@@ -8,7 +8,7 @@ public class SearchfilterParameters {
     Integer miles; //miles less then
     String color;
     Integer owners;
-    Boolean passinspec;
+    Boolean passedInspec;
     Integer priceStart;
     Integer priceEnd;
 
@@ -69,11 +69,11 @@ public class SearchfilterParameters {
     }
 
     public Boolean getPassinspec() {
-        return passinspec;
+        return passedInspec;
     }
 
     public void setPassinspec(Boolean passinspec) {
-        this.passinspec = passinspec;
+        this.passedInspec = passinspec;
     }
 
     public Integer getPriceStart() {

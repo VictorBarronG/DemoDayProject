@@ -1,22 +1,16 @@
 package com.tp.dealership.persistence;
 
 
-import com.tp.dealership.controllers.SearchfilterParameters;
+import com.tp.dealership.controllers.SearchFilterParameters;
 import com.tp.dealership.exceptions.InvalidIdException;
 import com.tp.dealership.models.Car;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.EnableLoadTimeWeaving;
-import org.springframework.context.annotation.Profile;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.SQLWarningException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.test.context.ActiveProfiles;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -134,6 +128,8 @@ public class DealerPostgresDaoTest {
 
 
     //test delete
+    //send car id that doesnt exist
+
     @Test
     public void deleteCarTest(){
         Car original = new Car();
@@ -203,7 +199,7 @@ public class DealerPostgresDaoTest {
         Car reTwo = toTest.addCar(CarTwo);
         Car reThree = toTest.addCar(carThree);
 
-        SearchfilterParameters toSearch = new SearchfilterParameters();
+        SearchFilterParameters toSearch = new SearchFilterParameters();
         toSearch.setMake("Honda");
 
         List<Car> result = toTest.filterSearch(toSearch);
