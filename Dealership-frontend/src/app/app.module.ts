@@ -12,6 +12,7 @@ import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { SearchIdComponent } from './search-id/search-id.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { DeleteCarComponent } from './delete-car/delete-car.component';
+import { HomeSimpleSearchComponent } from './home-simple-search/home-simple-search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { DeleteCarComponent } from './delete-car/delete-car.component';
     SearchFilterComponent,
     SearchIdComponent,
     EditCarComponent,
-    DeleteCarComponent
+    DeleteCarComponent,
+    HomeSimpleSearchComponent
   ],
   imports: [
     BrowserModule,
