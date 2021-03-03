@@ -11,6 +11,7 @@ import { CarLotComponent } from './car-lot/car-lot.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { SearchIdComponent } from './search-id/search-id.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
+import { DeleteCarComponent } from './delete-car/delete-car.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,8 @@ import { EditCarComponent } from './edit-car/edit-car.component';
     CarLotComponent,
     SearchFilterComponent,
     SearchIdComponent,
-    EditCarComponent
+    EditCarComponent,
+    DeleteCarComponent
   ],
   imports: [
     BrowserModule,

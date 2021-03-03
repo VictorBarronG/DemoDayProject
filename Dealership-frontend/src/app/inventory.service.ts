@@ -64,4 +64,29 @@ export class InventoryService {
     )
   }
 
+  editCar(toEdit : Car) : Observable<Car> {
+    console.log(toEdit);
+    return this.http.put<Car>(this.baseURL + "/editinventory", toEdit, this.httpOptions)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err =>{
+        console.log(err);
+        return of(null);
+      })
+    )
+  }
+
+  deleteById(Id : number) : Observable<Car> {
+    console.log(Id);
+    let url = this.baseURL + "/delete/" + Id;
+    return this.http.delete(url)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err =>{
+        console.log(err);
+        return of(null);
+      })
+    )
+  }
+
 }
