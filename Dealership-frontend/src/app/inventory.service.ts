@@ -14,7 +14,7 @@ export class InventoryService {
   constructor(private http: HttpClient) { 
 
   }
-
+//gets all available cars in the inventory
   getAllCars(): Observable<Car[]>{
     return this.http.get<Car[]>(this.baseURL + "/allvehicles")
     .pipe(
@@ -27,6 +27,7 @@ export class InventoryService {
     );
   }
 
+  //allows user to add a vehicle into the inventory
   addCar(toAdd : Car) : Observable<Car> {
     console.log(toAdd);
     return this.http.post<Car>(this.baseURL + "/addcar", toAdd, this.httpOptions)
@@ -39,6 +40,7 @@ export class InventoryService {
     )
   }
 
+  //returns a list of vehicles that match the searchparameters
   searchByFilter(toSearch : searchParameters) : Observable<Car[]> {
     console.log(toSearch);
     return this.http.post<Car[]>(this.baseURL + "/searchbyfilters", toSearch, this.httpOptions)
@@ -51,6 +53,7 @@ export class InventoryService {
     )
   }
 
+  //returns the single car by searching the id
   searchById(Id : number) : Observable<Car> {
     console.log(Id);
     let url = this.baseURL + "/searchbyid/" + Id;
@@ -64,6 +67,7 @@ export class InventoryService {
     )
   }
 
+  //take in a car with an id and allows the user to change all information except the id
   editCar(toEdit : Car) : Observable<Car> {
     console.log(toEdit);
     return this.http.put<Car>(this.baseURL + "/editinventory", toEdit, this.httpOptions)
@@ -76,6 +80,7 @@ export class InventoryService {
     )
   }
 
+  //deletes the single vehicle from the database referenced by the id
   deleteById(Id : number) : Observable<Car> {
     console.log(Id);
     let url = this.baseURL + "/delete/" + Id;
@@ -87,6 +92,18 @@ export class InventoryService {
         return of(null);
       })
     )
+  }
+
+  getMakes(): Observable<string[]>{
+    return this.http.get<string[]>(this.baseURL + "/getMakes")
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err =>{
+        console.log(err);
+        let empty : string[] = [];
+        return of(empty);
+      })
+    );
   }
 
 }

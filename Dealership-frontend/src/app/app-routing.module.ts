@@ -4,15 +4,17 @@ import { AddCarComponent } from './add-car/add-car.component';
 import { CarLotComponent } from './car-lot/car-lot.component';
 import { DeleteCarComponent } from './delete-car/delete-car.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
+import { HomeSimpleSearchComponent } from './home-simple-search/home-simple-search.component';
 import { SearchFilterComponent } from './search-filter/search-filter.component';
 import { SearchIdComponent } from './search-id/search-id.component';
 
-const routes: Routes = [{path:"", component: CarLotComponent},
+const routes: Routes = [{path:"", component: HomeSimpleSearchComponent},
                         {path:"add", component: AddCarComponent},
                         {path:"SearchFilter", component: SearchFilterComponent},
                         {path:"Searchid", component:SearchIdComponent},
                         {path:"editcar", component:EditCarComponent},
-                        {path:"delete", component: DeleteCarComponent}];
+                        {path:"delete", component: DeleteCarComponent},
+                        {path:"fullinventory", component:CarLotComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { InventoryService } from '../inventory.service';
 
 @Component({
   selector: 'app-home-simple-search',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeSimpleSearchComponent implements OnInit {
 
-  constructor() { }
+  makes : string[];
+  models: string[];
+
+  make : string;
+  model : string;
+
+  constructor(private service:InventoryService, private router : Router) {
+    this.service.getMakes().subscribe(list => {this.makes = list});
+   }
 
   ngOnInit(): void {
+  }
+
+  simpleSearch(){
+    
   }
 
 }

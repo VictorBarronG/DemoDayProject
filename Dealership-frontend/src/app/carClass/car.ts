@@ -9,4 +9,6 @@ export interface Car {
     passedInspec : boolean;
     vin : string;
     price : number;
+    description? : string;
+    imagePath? : string;
 }
