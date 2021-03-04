@@ -23,23 +23,96 @@ public class DealerPostgressDao implements DealerDao{
 
     @Override
     public List<Car> getCollection(){
-        List<Car> collection = template.query("SELECT id, make, model, miles, color, year, owners, passinspec, vin, price\n" +
-                "\tFROM public.\"car collection\";", new CarMapper());
+        List<Car> collection = template.query("SELECT a.id, b.make, c.model, miles, color, year, owners, passinspec, vin, price, description, \"imagePath\"\n" +
+                "\tFROM public.\"car collection\" a\n" +
+                "\tINNER JOIN public.\"makes\" b\n" +
+                "\tON b.id = a.makeid \n" +
+                "\tINNER JOIN public.\"models\" c\n" +
+                "\tON c.id = a.modelid;", new CarMapper());
 
         return collection;
     }
 
+    private Integer addMake(String toAdd){
+        Integer makeModelId = template.queryForObject("INSERT INTO public.makes(\n" +
+                "\tmake)\n" +
+                "\tVALUES (?) RETURNING id;", new MakeModelIdMapper(), toAdd);
+        return makeModelId;
+    }
+
+    private Integer addOrRetrieveMake(Car toAdd){
+        Integer make;
+        try {
+            make = template.queryForObject("SELECT id \n" +
+                    "FROM \"makes\"\n" +
+                    "WHERE make = ?", new MakeModelIdMapper(), toAdd.getMake());
+        }catch(EmptyResultDataAccessException e){
+            make = null;
+        }
+        if(make == null){
+            make = addMake(toAdd.getMake());
+        }
+        return make;
+    }
+
+    private Integer addModel(String toAdd){
+        Integer modelId = template.queryForObject("INSERT INTO public.models(\n" +
+                "\tmodel)\n" +
+                "\tVALUES (?) RETURNING id;", new MakeModelIdMapper(), toAdd);
+        return modelId;
+    }
+
+    private Integer addOrRetrieveModel(Car toAdd){
+        Integer model;
+        try {
+            model = template.queryForObject("SELECT id \n" +
+                    "FROM \"models\"\n" +
+                    "WHERE model = ?", new MakeModelIdMapper(), toAdd.getModel());
+        }catch(EmptyResultDataAccessException e){
+            model = null;
+        }
+        if(model == null){
+            model = addModel(toAdd.getModel());
+        }
+        return model;
+    }
+
+    private void existOrAddMakeModel(Integer makeId, Integer modelId){
+        Integer makeModel;
+        try {
+            makeModel = template.queryForObject("SELECT id \n" +
+                    "FROM \"makemodels\"\n" +
+                    "WHERE makeid = ? AND modelid = ?", new MakeModelIdMapper(), makeId, modelId);
+        }catch (EmptyResultDataAccessException e){
+            makeModel =  null;
+        }
+        if(makeModel == null){
+             addMakeModel(makeId, modelId);
+        }
+    }
+
+    private void addMakeModel(Integer makeId, Integer modelId) {
+        template.execute("INSERT INTO public.makemodels(\n" +
+                "\tmakeid, modelid)\n" +
+                "\tVALUES ("+ makeId +", "+ modelId +");");
+    }
+
     @Override
     public Car addCar(Car toAdd){
+        //adds make and model association to makemodel table and returns the id so that it can be assigned in the
+        //next insert to car collection
+        Integer makeId = addOrRetrieveMake(toAdd);
+        Integer modelId = addOrRetrieveModel(toAdd);
+        existOrAddMakeModel(makeId,modelId);
 
         //providing the ? for values to then add values into data to avoid sql injection.
         //change query for update
-        Integer id = template.queryForObject("INSERT INTO \"car collection\"(\n" +
-                "\tmake, model, miles, color, year, owners, passinspec, vin, price)\n" +
-                "\tVALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING \"id\";", new CarIdMapper(), toAdd.getMake(), toAdd.getModel(), toAdd.getMiles(), toAdd.getColor(),
-                toAdd.getYear(),toAdd.getOwners(),toAdd.isPassedInspec(),toAdd.getVin(), toAdd.getPrice());
+        Integer carId = template.queryForObject("INSERT INTO \"car collection\"(\n" +
+                "\tmakeid, modelid, miles, color, year, owners, passinspec, vin, price, description, \"imagePath\")\n" +
+                "\tVALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING \"id\";", new CarIdMapper(), makeId, modelId, toAdd.getMiles(), toAdd.getColor(),
+                toAdd.getYear(),toAdd.getOwners(),toAdd.isPassedInspec(),toAdd.getVin(), toAdd.getPrice(), toAdd.getDescription(), toAdd.getImagePath());
 
-        toAdd.setId(id);
+        toAdd.setId(carId);
         return toAdd;
     }
 
@@ -49,8 +122,6 @@ public class DealerPostgressDao implements DealerDao{
                         "\tSET make=?, model=?, miles=?, color=?, year=?, owners=?, passinspec=?, vin=?, price=?\n" +
                         "\tWHERE id= ? RETURNING \"id\";", new CarIdMapper(), toAdd.getMake(), toAdd.getModel(), toAdd.getMiles(), toAdd.getColor(),
                 toAdd.getYear(),toAdd.getOwners(),toAdd.isPassedInspec(),toAdd.getVin(), toAdd.getPrice(),toAdd.getId());
-
-        toAdd.setId(id);
         return toAdd;
     }
 
@@ -202,6 +273,14 @@ public class DealerPostgressDao implements DealerDao{
     }
 
     class CarIdMapper implements RowMapper<Integer>{
+
+        @Override
+        public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
+            return resultSet.getInt("id");
+        }
+    }
+
+    class MakeModelIdMapper implements RowMapper<Integer>{
 
         @Override
         public Integer mapRow(ResultSet resultSet, int i) throws SQLException {
