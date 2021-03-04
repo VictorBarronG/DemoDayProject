@@ -103,4 +103,8 @@ public class DealerService {
         }
         return dao.filterSearch(toSearch);
     }
+
+    public List<String> getAllMakes() {
+        return dao.getAllMakes();
+    }
 }

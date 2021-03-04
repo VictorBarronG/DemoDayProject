@@ -16,4 +16,6 @@ public interface DealerDao {
     public Car getById(Integer id) throws InvalidIdException;
 
     public List<Car> filterSearch(SearchFilterParameters toSearch);
+
+    public List<String> getAllMakes();
 }

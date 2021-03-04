@@ -40,4 +40,9 @@ public class DealerInMemDao implements DealerDao {
     public List<Car> filterSearch(SearchFilterParameters toSearch) {
         return null;
     }
+
+    @Override
+    public List<String> getAllMakes() {
+        return null;
+    }
 }

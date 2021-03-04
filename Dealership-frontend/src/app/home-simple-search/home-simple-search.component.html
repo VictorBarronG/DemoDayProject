@@ -1,6 +1,9 @@
 <div class="welcome">Welcome to Our online Dealership!<br>
     <div>
-        <select [(ngModel)]="make"></select>
+        <select [(ngModel)]="make">
+            <option value="">Select Make</option>
+            <option *ngFor="let make of makes" make=make>{{make}}</option>
+        </select>
         <select [(ngModel)]="model"></select>
         <button (click)="simpleSearch()"></button>
     </div>
