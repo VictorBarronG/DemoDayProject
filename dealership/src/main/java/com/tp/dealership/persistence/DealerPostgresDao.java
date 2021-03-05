@@ -16,7 +16,7 @@ import java.util.List;
 
 @Component
 @Profile({"production","daoTesting"})
-public class DealerPostgressDao implements DealerDao{
+public class DealerPostgresDao implements DealerDao{
 
     @Autowired
     private JdbcTemplate template;
@@ -153,8 +153,12 @@ public class DealerPostgressDao implements DealerDao{
 
     @Override
     public List<Car> filterSearch(SearchFilterParameters toSearch) {
-        List<Car> collection = template.query("SELECT id, make, model, miles, color, year, owners, passinspec, vin, price, description=?, \"imagePath\"=?\n" +
-                "\tFROM public.\"car collection\" " + filteredInput(toSearch), new CarMapper());
+        List<Car> collection = template.query("SELECT a.id, b.make, c.model, miles, color, year, owners, passinspec, vin, price, description, \"imagePath\"\n" +
+                "\tFROM public.\"car collection\" a\n" +
+                "\tINNER JOIN public.makes b\n" +
+                "\tON a.makeid = b.id\n" +
+                "\tINNER JOIN public.models c\n" +
+                "\tON a.modelid = c.id " + filteredInput(toSearch), new CarMapper());
 
         return collection;
     }
@@ -225,7 +229,7 @@ public class DealerPostgressDao implements DealerDao{
             if(!needsAnd){
                 toReturn += " AND ";
             }
-            toReturn = toReturn + ("make = '" + makeId + "'");
+            toReturn = toReturn + ("makeid = '" + makeId + "'");
             needsAnd = false;
         } //handles make (S)
 
@@ -234,7 +238,7 @@ public class DealerPostgressDao implements DealerDao{
             if(!needsAnd){
                 toReturn +=" AND ";
             }
-            toReturn = toReturn + ("model = '" + modelId + "'");
+            toReturn = toReturn + ("modelid = '" + modelId + "'");
             needsAnd = false;
         }//handles model (S)
 
@@ -295,7 +299,7 @@ public class DealerPostgressDao implements DealerDao{
             mappedCar.setVin(resultSet.getString("vin"));
             mappedCar.setPrice(resultSet.getInt("price"));
             mappedCar.setDescription(resultSet.getString("description"));
-            mappedCar.setImagePath(resultSet.getString("imagepath"));
+            mappedCar.setImagePath(resultSet.getString("imagePath"));
 
             return mappedCar;
         }

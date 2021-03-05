@@ -13,6 +13,20 @@ export class AppComponent {
   goHome(){
     this.router.navigate([""]);
   }
+
+  goInventory(){
+    this.router.navigate(["fullinventory"]);
+  }
+
+  goSearchPara(){
+    this.router.navigate(["SearchFilter"]);
+  }
+
+  goToAdd(){
+    this.router.navigate(["add"]);
+  }
+
+  
 }
 
 

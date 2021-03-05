@@ -1,14 +1,16 @@
 <div class="welcome">Welcome to Our online Dealership!<br>
     <div>
         <select [(ngModel)]="make" (change)="getModels()">
-            <option value=null>Select Make</option>
+            <option value=undefined>Select Make</option>
             <option *ngFor="let make of makes" make=make>{{make}}</option>
         </select>
         <select [(ngModel)]="model">
-            <option value=null>Select Model</option>
+            <option selected value=undefined>Select Model</option>
             <option *ngFor="let model of models" model=model>{{model}}</option>
         </select>
-        <button (click)="simpleSearch()"></button>
-        {{make}}
+        <button (click)="simpleSearch()">Quick Search</button>
+    </div>
+    <div>
+        <app-car *ngFor="let car of cars" [car]=car></app-car>
     </div>
 </div>

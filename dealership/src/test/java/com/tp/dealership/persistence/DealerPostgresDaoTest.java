@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class DealerPostgresDaoTest {
 
     @Autowired
-    DealerPostgressDao toTest;
+    DealerPostgresDao toTest;
 
     @Autowired
     JdbcTemplate template;

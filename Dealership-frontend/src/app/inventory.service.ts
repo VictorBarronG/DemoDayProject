@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Car } from './carClass/car';
+import { Car } from './carclass/car';
 import {tap, catchError} from 'rxjs/operators';
 import { searchParameters } from './carclass/searchParameters';
 
