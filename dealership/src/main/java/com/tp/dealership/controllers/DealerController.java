@@ -38,6 +38,9 @@ public class DealerController {
     @GetMapping("/getMakes")
     public ResponseEntity getMakes(){return ResponseEntity.ok(service.getAllMakes());}
 
+    @GetMapping("/getModels/{make}")
+    public ResponseEntity getModels(@PathVariable String make){return ResponseEntity.ok(service.getAllModels(make));}
+
     @GetMapping("/searchbyid/{id}")
     public ResponseEntity getById(@PathVariable Integer id){
         try {

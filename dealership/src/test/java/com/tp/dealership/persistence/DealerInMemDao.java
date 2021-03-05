@@ -45,4 +45,9 @@ public class DealerInMemDao implements DealerDao {
     public List<String> getAllMakes() {
         return null;
     }
+
+    @Override
+    public List<String> getAllModels(String make) {
+        return null;
+    }
 }

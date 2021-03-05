@@ -166,6 +166,18 @@ public class DealerPostgressDao implements DealerDao{
         return allMakes;
     }
 
+    @Override
+    public List<String> getAllModels(String make) {
+        List<String> allModels = template.query("SELECT c.model\n" +
+                "\tFROM public.makemodels a\n" +
+                "\tINNER JOIN public.makes b\n" +
+                "\tON a.makeid = b.id\n" +
+                "\tINNER JOIN public.models c\n" +
+                "\tON a.modelid = c.id\n" +
+                "\tWHERE b.make = ?;", new modelMapper(), make);
+        return allModels;
+    }
+
 
     //helper method that builds a string for the where clause of the sql for filterSearch
     private String filteredInput(SearchFilterParameters toSearch) {
@@ -311,6 +323,14 @@ public class DealerPostgressDao implements DealerDao{
         @Override
         public String mapRow(ResultSet resultSet, int i) throws SQLException {
             return resultSet.getString("make");
+        }
+    }
+
+    class modelMapper implements RowMapper<String>{
+
+        @Override
+        public String mapRow(ResultSet resultSet, int i) throws SQLException {
+            return resultSet.getString("model");
         }
     }
 

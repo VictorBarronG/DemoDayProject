@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { InventoryService } from '../inventory.service';
+import {searchParameters} from '../carclass/searchParameters';
 
 @Component({
   selector: 'app-home-simple-search',
@@ -23,7 +24,13 @@ export class HomeSimpleSearchComponent implements OnInit {
   }
 
   simpleSearch(){
-    
+    let simpleParameter: searchParameters;
+    simpleParameter = {make : this.make, model : this.model};
+    this.service.searchByFilter(simpleParameter).subscribe();
+  }
+
+  getModels(){
+    this.service.getModels(this.make).subscribe(list => {this.models = list});
   }
 
 }

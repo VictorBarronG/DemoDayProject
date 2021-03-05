@@ -107,4 +107,6 @@ public class DealerService {
     public List<String> getAllMakes() {
         return dao.getAllMakes();
     }
+
+    public List<String> getAllModels(String make) { return dao.getAllModels(make);}
 }

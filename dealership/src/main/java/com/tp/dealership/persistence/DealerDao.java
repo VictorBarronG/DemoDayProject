@@ -18,4 +18,6 @@ public interface DealerDao {
     public List<Car> filterSearch(SearchFilterParameters toSearch);
 
     public List<String> getAllMakes();
+
+    public List<String> getAllModels(String make);
 }

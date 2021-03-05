@@ -2,7 +2,7 @@ import { NULL_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Car } from '../carClass/car';
-import { searchParameters } from '../carClass/searchParameters';
+import { searchParameters } from '../carclass/searchParameters';
 import { InventoryService } from '../inventory.service';
 
 @Component({

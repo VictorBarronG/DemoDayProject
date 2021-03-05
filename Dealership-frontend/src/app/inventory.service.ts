@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Car } from './carClass/car';
 import {tap, catchError} from 'rxjs/operators';
-import { searchParameters } from './carClass/searchParameters';
+import { searchParameters } from './carclass/searchParameters';
 
 @Injectable({
   providedIn: 'root'
@@ -105,5 +105,18 @@ export class InventoryService {
       })
     );
   }
+
+  getModels(make : String): Observable<string[]>{
+    return this.http.get<string[]>(this.baseURL + "/getModels/" + make)
+    .pipe(
+      tap(x => console.log(x)),
+      catchError(err =>{
+        console.log(err);
+        let empty : string[] = [];
+        return of(empty);
+      })
+    );
+  }
+
 
 }
