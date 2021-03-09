@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Car } from '../carclass/car';
+import { InventoryService } from '../inventory.service';
 
 @Component({
   selector: 'app-car',
@@ -10,9 +12,20 @@ import { Car } from '../carclass/car';
 export class CarComponent implements OnInit {
   @Input() car : Car | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private service: InventoryService, private router : Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+  deleteCar(): void{
+    this.service.deleteById(this.car.id).subscribe((_) => {this.router.navigate(["fullinventory"])});
+    alert("Deleted");
+    window.location.reload();
+  }
+
+  editCar() : void{
+    alert("edit")
+    this.router.navigate(['editcar', {id : this.car.id}]);
   }
 
 

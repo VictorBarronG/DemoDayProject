@@ -5,11 +5,18 @@
     <div class="carInfo">
     {{car.year}}
     <div class="price">
-        $ {{car.price}}
+     ${{car.price}}
     </div><br>
     {{car.make}}<br>
     {{car.model}}<br>
-    {{car.description}}<br>
+    <div class="vin" >
     {{car.vin}}
+    </div><br>
+    <div class="buttonSelection">
+        <button>View</button>
+        <button (click)="deleteCar()">Delete</button>
+        <button (click)="editCar()" >Edit</button>
+    </div>
     </div>
 </div>
+

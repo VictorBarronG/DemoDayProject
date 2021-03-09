@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Car } from '../carclass/car';
 import { InventoryService } from '../inventory.service';
 
@@ -20,10 +20,17 @@ export class EditCarComponent implements OnInit {
   passinspec : boolean = false;
   vin : string;
   price : number;
+  description : string;
+  car : Car;
 
-  constructor(private service:InventoryService, private router : Router ) { }
+  constructor(private service:InventoryService, private router : Router, private route: ActivatedRoute ) { 
+    
+
+  }
 
   ngOnInit(): void {
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.service.searchById(this.id).subscribe(returnedCar => {this.car = returnedCar});
   }
 
   editCar(){
@@ -33,7 +40,7 @@ export class EditCarComponent implements OnInit {
       miles : this.miles, color : this.color,
       year : this.year, owners : this.owners,
       passedInspec : this.passinspec, vin : this.vin,
-      price : this.price
+      price : this.price, description : this.description
     };
     this.service.editCar(toEdit).subscribe((_) => {this.router.navigate([""])})
   }

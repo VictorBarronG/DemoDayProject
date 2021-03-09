@@ -22,20 +22,30 @@ export class SearchFilterComponent implements OnInit {
   priceStart : number;
   priceEnd: number;
 
+  makes : string[];
+  models: string[];
   cars:Car[];
 
-  constructor(private service : InventoryService, private router : Router) { }
+  constructor(private service : InventoryService, private router : Router) { 
+    this.service.getMakes().subscribe(list => {this.makes = list});
+  }
 
   ngOnInit(): void {
   }
-searchFilter(){
-    let toSearch : searchParameters = {make : this.make, model : this.model, 
-                      miles : this.miles, color : this.color,
-                      yearStart : this.yearStart, yearEnd: this.yearEnd,
-                      owners : this.owners,
-                      passedInspec : this.passinspec,
-                      priceStart : this.priceStart, priceEnd:this.priceEnd};
-    this.service.searchByFilter(toSearch).subscribe(list => {this.cars = list});
+
+
+  getModels(){
+    this.service.getModels(this.make).subscribe(list => {this.models = list});
   }
+
+  searchFilter(){
+      let toSearch : searchParameters = {make : this.make, model : this.model, 
+                        miles : this.miles, color : this.color,
+                        yearStart : this.yearStart, yearEnd: this.yearEnd,
+                        owners : this.owners,
+                        passedInspec : this.passinspec,
+                        priceStart : this.priceStart, priceEnd:this.priceEnd};
+      this.service.searchByFilter(toSearch).subscribe(list => {this.cars = list});
+    }
 
 }

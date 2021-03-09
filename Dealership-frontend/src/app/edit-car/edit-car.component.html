@@ -1,13 +1,18 @@
-<input type="text" [(ngModel)]="id" placeholder="Id">
-<input type="text" [(ngModel)]="make" placeholder="Make">
-<input type="text" [(ngModel)]="model" placeholder="Model"> <br>
-<input type="number" [(ngModel)]="miles" placeholder="Miles">
-<input type="text" [(ngModel)]="color" placeholder="color"> <br>
-<input type="number" [(ngModel)]="year" placeholder="Year">
-<input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
-<span>Did it pass inspections?</span><input type="checkbox" [(ngModel)]="passinspec" checked="true"><br>
-<input type="text" [(ngModel)]="vin" placeholder="Vin">
-<input type="number" [(ngModel)]="price" placeholder="Price">
-<button (click)="editCar()">Edit Car</button>
-
-<p>{{make}} - {{model}}</p>
+<div class="container">
+    Make:<input type="text" [(ngModel)]="car.make">
+    Model: <input type="text" [(ngModel)]="car.model"> <br>
+    Miles:<input type="number" [(ngModel)]="car.miles" >
+    Color:   <input type="text" [(ngModel)]="car.color"> <br>
+    Year: <input type="number" [(ngModel)]="car.year">
+    Owners:<input type="number" [(ngModel)]="car.owners"> <br>
+    <span>Did it pass inspections?  </span>
+    <select [(ngModel)]="car.passedInspec">
+        <option value=false >No</option>
+        <option value=true>Yes</option>
+    </select><br>
+    Vin: <input type="text" [(ngModel)]="car.vin">
+    Price: <input type="number" [(ngModel)]="car.price"><br>
+    Description: <br>
+    <textarea class="descriptionBox" type="text" [(ngModel)]="car.description"></textarea><br>
+    <button (click)="editCar()">Edit Car</button>
+    </div>

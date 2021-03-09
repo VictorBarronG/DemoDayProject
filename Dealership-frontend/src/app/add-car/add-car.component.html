@@ -1,20 +1,20 @@
 <div class="container">
 <input class="image" #imageInput type="file" accept="image/*" (change)="uploadImage(imageInput)"><br>
 Make:<input type="text" [(ngModel)]="make" placeholder="Make">
-Model:<input type="text" [(ngModel)]="model" placeholder="Model"> <br>
-Miles: <input type="number" [(ngModel)]="miles" placeholder="Miles">
-Color: <input type="text" [(ngModel)]="color" placeholder="Color"> <br>
+Model: <input type="text" [(ngModel)]="model" placeholder="Model"> <br>
+Miles:<input type="number" [(ngModel)]="miles" placeholder="Miles">
+Color:   <input type="text" [(ngModel)]="color" placeholder="Color"> <br>
 Year: <input type="number" [(ngModel)]="year" placeholder="Year">
-Owners: <input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
+Owners:<input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
 <span>Did it pass inspections?  </span>
 <select [(ngModel)]="passinspec">
-    <option value=false>No</option>
+    <option value=false selected>No</option>
     <option value=true>Yes</option>
 </select><br>
 Vin: <input type="text" [(ngModel)]="vin" placeholder="Vin">
 Price: <input type="number" [(ngModel)]="price" placeholder="Price"><br>
 Description: <br>
-<textarea class="descriptionBox" type="text" [(ngModel)]="description" placeholder="Description"></textarea>
+<textarea class="descriptionBox" type="text" [(ngModel)]="description" placeholder="Description"></textarea><br>
 <button (click)="addCar()">Add Car</button>
 </div>
 <p>{{make}} - {{model}}</p>

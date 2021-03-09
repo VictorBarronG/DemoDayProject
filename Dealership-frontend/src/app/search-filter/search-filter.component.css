@@ -1,3 +1,11 @@
 .results{
     display: inline-block;
 }
+.container{
+    width: 50vh;
+    background-color: wheat;
+    padding: 20px;
+    align-content: center;
+    float: top;
+    margin-left: 20%;
+}

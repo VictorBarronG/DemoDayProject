@@ -144,7 +144,7 @@ public class DealerPostgresDao implements DealerDao{
                             "\tON b.id = a.makeid \n" +
                             "\tINNER JOIN public.\"models\" c\n" +
                             "\tON c.id = a.modelid \n" +
-                    "\tWHERE id = ?;", new CarMapper(), id);
+                    "\tWHERE a.id = ?;", new CarMapper(), id);
         }catch (EmptyResultDataAccessException e){
             throw new InvalidIdException("Invalid Id.");
         }

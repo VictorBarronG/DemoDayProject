@@ -42,4 +42,7 @@ export class AddCarComponent implements OnInit {
     this.service.addCar(toAdd).subscribe((_)=> {this.router.navigate([""])});
   }
 
+
+    
+
 }

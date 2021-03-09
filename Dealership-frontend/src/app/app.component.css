@@ -56,3 +56,11 @@ padding-top: 60px;
     outline: none;
     float: left;
 }
+
+.routes{
+    background-image: url("/assets/BackgroundForAll.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 680px;
+}
