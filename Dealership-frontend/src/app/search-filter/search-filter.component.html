@@ -8,5 +8,5 @@
 <input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
 <input type="number" [(ngModel)]="priceStart" placeholder="Price From">
 <input type="number" [(ngModel)]="priceEnd" placeholder="Price To">
-<button (click)="searchFilter()">Search</button>
-<app-car *ngFor="let car of cars" [car]="car"> </app-car>
+<button (click)="searchFilter()">Search</button><br>
+<app-car class="results" *ngFor="let car of cars" [car]="car"> </app-car>

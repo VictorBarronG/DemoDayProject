@@ -1,7 +1,15 @@
-<button class="button">
-    {{car.year}}<br>
+<div class="container">
+    <div class="imageBox">
+    <img class="carImage" src="/assets/comingSoon.png">
+    </div>
+    <div class="carInfo">
+    {{car.year}}
+    <div class="price">
+        $ {{car.price}}
+    </div><br>
     {{car.make}}<br>
     {{car.model}}<br>
     {{car.description}}<br>
     {{car.vin}}
-</button>
+    </div>
+</div>

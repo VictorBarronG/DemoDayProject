@@ -1,8 +1,10 @@
 <div class="header">
     <button class="logo" (click)="goHome()">Limitless <br>Auto Sales</button>
+    <div class="navBar">
     <button class="leftMostNavButton" (click)="goInventory()"> Full Inventory</button> |
     <button class="navButton" (click)="goSearchPara()">Advanced Search</button> |
     <button class="navButton" (click)="goToAdd()">Add Vheicle</button>
+    </div>
 </div>
 <router-outlet></router-outlet>
 <footer class="footer"></footer>

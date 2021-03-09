@@ -5,6 +5,11 @@
     background-color: lightgray;
     font-size: 25px;
 }
+
+.navBar{
+padding-top: 60px;
+}
+
 .leftMostNavButton{
     border: none;
     background: none;
