@@ -1,12 +1,12 @@
 .welcome{
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 95px;
+    font-size: 92px;
     background-image: url("/assets/Background.jpg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 700px;
+    height: 100%;
 }
 select{
     text-transform: capitalize;

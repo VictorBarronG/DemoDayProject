@@ -13,6 +13,8 @@ import { SearchIdComponent } from './search-id/search-id.component';
 import { EditCarComponent } from './edit-car/edit-car.component';
 import { DeleteCarComponent } from './delete-car/delete-car.component';
 import { HomeSimpleSearchComponent } from './home-simple-search/home-simple-search.component';
+import { ViewCarComponent } from './view-car/view-car.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +25,9 @@ import { HomeSimpleSearchComponent } from './home-simple-search/home-simple-sear
     SearchIdComponent,
     EditCarComponent,
     DeleteCarComponent,
-    HomeSimpleSearchComponent
+    HomeSimpleSearchComponent,
+    ViewCarComponent,
+    AdminLoginComponent
   ],
   imports: [
     BrowserModule,

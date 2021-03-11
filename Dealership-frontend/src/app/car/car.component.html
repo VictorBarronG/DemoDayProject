@@ -1,19 +1,19 @@
 <div class="container">
     <div class="imageBox">
-    <img class="carImage" src="/assets/comingSoon.png">
+    <img class="carImage" src={{car.imagePath}}>
     </div>
     <div class="carInfo">
     {{car.year}}
     <div class="price">
-     ${{car.price}}
-    </div><br>
-    {{car.make}}<br>
-    {{car.model}}<br>
+     ${{price}}
+    </div><br><br>
+    {{car.make}}<br><br>
+    {{car.model}}<br><br>
     <div class="vin" >
     {{car.vin}}
     </div><br>
     <div class="buttonSelection">
-        <button>View</button>
+        <button (click)="viewCar()" >View</button>
         <button (click)="deleteCar()">Delete</button>
         <button (click)="editCar()" >Edit</button>
     </div>

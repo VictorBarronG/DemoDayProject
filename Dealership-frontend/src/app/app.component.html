@@ -3,10 +3,11 @@
     <div class="navBar">
     <button class="leftMostNavButton" (click)="goInventory()"> Full Inventory</button> |
     <button class="navButton" (click)="goSearchPara()">Advanced Search</button> |
-    <button class="navButton" (click)="goToAdd()">Add Vheicle</button>
+    <button class="navButton" (click)="goToAdd()" *ngIf="loggedIn">Add Vehicle</button>
+    <button class="admin" (click)="goToLogin()">Log In</button>
     </div>
 </div>
 <div class="routes">
-<router-outlet></router-outlet>
+<router-outlet (activate)="getUserLoggedIn($event)" ></router-outlet>
 </div>
 <footer class="footer"></footer>

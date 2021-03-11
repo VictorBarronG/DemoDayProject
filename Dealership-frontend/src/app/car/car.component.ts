@@ -11,10 +11,14 @@ import { InventoryService } from '../inventory.service';
 })
 export class CarComponent implements OnInit {
   @Input() car : Car | undefined;
+  price : any | undefined;
+  
 
-  constructor(private http: HttpClient, private service: InventoryService, private router : Router, private route: ActivatedRoute) { }
+  constructor(private http: HttpClient, private service: InventoryService, private router : Router, private route: ActivatedRoute) {   }
 
   ngOnInit(): void {
+    this.price =  this.car.price.toLocaleString("en-US");
+    
   }
 
   deleteCar(): void{
@@ -24,8 +28,11 @@ export class CarComponent implements OnInit {
   }
 
   editCar() : void{
-    alert("edit")
     this.router.navigate(['editcar', {id : this.car.id}]);
+  }
+
+  viewCar() : void{
+    this.router.navigate(['viewcar', {id : this.car.id}]);
   }
 
 

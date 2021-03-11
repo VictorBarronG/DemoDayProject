@@ -22,7 +22,7 @@ public class DealerService {
     //throws invalid for range for miles,price, owners
     //changes all string inputs to lowercase
     public Car addCar(Car toAdd) throws InvalidInputException{
-        if(!(toAdd.getYear() > 1950 && toAdd.getYear() < 2020)){throw new InvalidInputException("Year is not in range.");}
+        if(!(toAdd.getYear() > 1950 && toAdd.getYear() <= 2020)){throw new InvalidInputException("Year is not in range.");}
         if(toAdd.getMake().isBlank()){ throw new InvalidInputException("Make is empty."); }
         toAdd.setMake(toAdd.getMake().toLowerCase());
         if(toAdd.getModel().isBlank()){ throw new InvalidInputException("Model is empty."); }
@@ -38,7 +38,7 @@ public class DealerService {
     }
 
     public Car editCar(Car toAdd) throws InvalidInputException {
-        if(!(toAdd.getYear() > 1950 && toAdd.getYear() < 2020)){throw new InvalidInputException("Year is not in range.");}
+        if(!(toAdd.getYear() > 1950 && toAdd.getYear() <= 2020)){throw new InvalidInputException("Year is not in range.");}
         if(toAdd.getMake().isBlank()){ throw new InvalidInputException("Make is empty."); }
         toAdd.setMake(toAdd.getMake().toLowerCase());
         if(toAdd.getModel().isBlank()){ throw new InvalidInputException("Model is empty."); }

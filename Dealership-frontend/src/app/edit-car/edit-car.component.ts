@@ -42,7 +42,7 @@ export class EditCarComponent implements OnInit {
       passedInspec : this.passinspec, vin : this.vin,
       price : this.price, description : this.description
     };
-    this.service.editCar(toEdit).subscribe((_) => {this.router.navigate([""])})
+    this.service.editCar(toEdit).subscribe(returnedCar => {this.router.navigate(['viewcar', {id : this.car.id}])});
   }
 
 }

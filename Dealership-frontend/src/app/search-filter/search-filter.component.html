@@ -4,17 +4,25 @@
         <option *ngFor="let make of makes" make=make>{{make}}</option>
     </select>
     <select [(ngModel)]="model">
+        <option *ngIf="model">{{model}}</option>
         <option selected value=undefined>Select Model</option>
         <option *ngFor="let model of models" model=model>{{model}}</option>
-    </select><br>
-    <input type="number" [(ngModel)]="miles" placeholder="Miles">
-    <input type="text" [(ngModel)]="color" placeholder="color"> <br>
-    <input type="number" [(ngModel)]="yearStart" placeholder="Year Start">
+    </select>
+    <div class="rightContainer">
+        <input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
+        <input type="number" [(ngModel)]="miles" placeholder="Miles Under">
+        <input type="text" [(ngModel)]="color" placeholder="Color">
+    </div>
+    <br><input type="number" [(ngModel)]="priceStart" placeholder="Price From"> --
+    <input type="number" [(ngModel)]="priceEnd" placeholder="Price To"><br>
+    <input type="number" [(ngModel)]="yearStart" placeholder="Year Start"> --
     <input type="number" [(ngModel)]="yearEnd" placeholder="Year End"> <br>
-    <span>Did it pass inspections?</span><input type="checkbox" [(ngModel)]="passinspec" checked="true"><br>
-    <input type="number" [(ngModel)]="owners" placeholder="Owners"> <br>
-    <input type="number" [(ngModel)]="priceStart" placeholder="Price From">
-    <input type="number" [(ngModel)]="priceEnd" placeholder="Price To">
+    <span>Did it pass inspections?</span>
+    <select [(ngModel)]="passinspec">
+        <option value=true >Yes</option>
+        <option value=false>No</option>
+    </select>
+    
     <button (click)="searchFilter()">Search</button><br>
 </div>
 <app-car class="results" *ngFor="let car of cars" [car]="car"> </app-car>

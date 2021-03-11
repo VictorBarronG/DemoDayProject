@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { InventoryService } from '../inventory.service';
 import {searchParameters} from '../carclass/searchParameters';
 import { Car } from '../carclass/car';
+import { SearchParamService } from '../search-param.service';
 
 @Component({
   selector: 'app-home-simple-search',
@@ -18,7 +19,7 @@ export class HomeSimpleSearchComponent implements OnInit {
   model : string;
   cars : Car[];
 
-  constructor(private service:InventoryService, private router : Router) {
+  constructor(private service:InventoryService, private router : Router, private searchService : SearchParamService) {
     this.service.getMakes().subscribe(list => {this.makes = list});
    }
 
@@ -28,10 +29,8 @@ export class HomeSimpleSearchComponent implements OnInit {
   simpleSearch(){
     let simpleParameter: searchParameters;
     simpleParameter = {make : this.make, model : this.model};
-    //this.router.navigate(["SearchFilter"]);
-    console.log(simpleParameter.make);
-    console.log(simpleParameter.model);
-    this.service.searchByFilter(simpleParameter).subscribe(list => {this.cars = list});
+    this.searchService.setSearch(simpleParameter);
+    this.router.navigate(["SearchFilter"]);
   }
 
   getModels(){

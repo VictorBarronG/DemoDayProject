@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Car } from '../carclass/car';
 import { searchParameters } from '../carclass/searchParameters';
 import { InventoryService } from '../inventory.service';
+import { SearchParamService } from '../search-param.service';
 
 @Component({
   selector: 'app-search-filter',
@@ -11,26 +12,37 @@ import { InventoryService } from '../inventory.service';
   styleUrls: ['./search-filter.component.css']
 })
 export class SearchFilterComponent implements OnInit {
-  make : string = null;
+  make : string = "";
   model : string;
   miles : number;
   color : string;
   yearStart : number;
   yearEnd:number;
   owners : number;
-  passinspec : boolean = false;
+  passinspec : boolean = true;
   priceStart : number;
   priceEnd: number;
 
   makes : string[];
   models: string[];
   cars:Car[];
+  firstPageLoad: boolean = true;
 
-  constructor(private service : InventoryService, private router : Router) { 
-    this.service.getMakes().subscribe(list => {this.makes = list});
+  constructor(private service : InventoryService, private router : Router, private searchPara : SearchParamService) { 
+   
   }
 
   ngOnInit(): void {
+    this.service.getMakes().subscribe(list => {this.makes = list;
+      let params : searchParameters = this.searchPara.getSearch();
+      console.log(params)
+      if(params){
+        this.make = params.make;
+        this.model = params.model;
+        this.searchPara.clearSearchPara();
+        this.searchFilter();
+      }
+    });
   }
 
 

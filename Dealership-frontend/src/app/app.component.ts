@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import * as EventEmitter from 'events';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,23 +9,35 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Dealership-frontend';
+  title : string = 'Dealership-frontend';
+  loggedIn : boolean;
 
-  constructor( private router : Router){}
-  goHome(){
+  constructor( private router : Router, private log : LoginService){
+    
+  }
+  goHome() : void{
     this.router.navigate([""]);
   }
 
-  goInventory(){
+  goInventory() : void{
     this.router.navigate(["fullinventory"]);
   }
 
-  goSearchPara(){
+  goSearchPara() : void{
     this.router.navigate(["SearchFilter"]);
   }
 
-  goToAdd(){
+  goToAdd() : void{
     this.router.navigate(["add"]);
+  }
+  
+  goToLogin() : void{
+    this.router.navigate(["login"]);
+  }
+
+  getUserLoggedIn(event : Event) : void{
+    console.log(event);
+    this.loggedIn = this.log.getStatus();
   }
 
   

@@ -1,5 +1,5 @@
 <div class="container">
-<input class="image" #imageInput type="file" accept="image/*" (change)="uploadImage(imageInput)"><br>
+Link to Image: <input type="text" [(ngModel)]="imagePath" placeholder="Url"><br>
 Make:<input type="text" [(ngModel)]="make" placeholder="Make">
 Model: <input type="text" [(ngModel)]="model" placeholder="Model"> <br>
 Miles:<input type="number" [(ngModel)]="miles" placeholder="Miles">
