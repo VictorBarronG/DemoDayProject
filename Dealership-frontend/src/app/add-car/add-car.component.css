@@ -19,12 +19,14 @@
     margin-top: 30px;
     border-radius: 10px;
     overflow: hidden;
+    padding-left: 10px;
 }
 
 .descriptionBox{
     width: 80%;
     height: 100px;
     margin-left: 40px;
+    text-transform: none;
 }
 
 input{
@@ -50,4 +52,6 @@ button{
     width: 120px;
     height: 30px;
     margin: 10px;
+    float: right;
+    border-radius: 5px;
 }

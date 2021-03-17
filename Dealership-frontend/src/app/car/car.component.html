@@ -14,8 +14,8 @@
     </div><br>
     <div class="buttonSelection">
         <button (click)="viewCar()" >View</button>
-        <button (click)="deleteCar()">Delete</button>
-        <button (click)="editCar()" >Edit</button>
+        <button *ngIf="loggedIn" (click)="deleteCar()">Delete</button>
+        <button *ngIf="loggedIn" (click)="editCar()" >Edit</button>
     </div>
     </div>
 </div>

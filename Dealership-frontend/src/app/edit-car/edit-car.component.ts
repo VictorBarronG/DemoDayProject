@@ -34,15 +34,7 @@ export class EditCarComponent implements OnInit {
   }
 
   editCar(){
-    let toEdit : Car = {
-      id : this.id,
-      make : this.make, model : this.model, 
-      miles : this.miles, color : this.color,
-      year : this.year, owners : this.owners,
-      passedInspec : this.passinspec, vin : this.vin,
-      price : this.price, description : this.description
-    };
-    this.service.editCar(toEdit).subscribe(returnedCar => {this.router.navigate(['viewcar', {id : this.car.id}])});
+    this.service.editCar(this.car).subscribe(returnedCar => {this.router.navigate(['viewcar', {id : this.car.id}])});
   }
 
 }

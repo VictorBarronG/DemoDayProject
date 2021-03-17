@@ -1,8 +1,8 @@
 .container{
-    width: 37vh;
+    width: 36vh;
     height: 45vh;
     font-size: medium;
-    margin: 1%;
+    margin: .5%;
     margin-bottom: 2%;
     border: 3px solid #000000;
     display: inline-block;

@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import * as EventEmitter from 'events';
 import { LoginService } from './login.service';
 
 @Component({

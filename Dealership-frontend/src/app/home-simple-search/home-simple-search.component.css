@@ -12,9 +12,14 @@ select{
     text-transform: capitalize;
     width: 150px;
     height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-right: 5px;
 }
 
 button{
-    margin-left: 10px;
+    margin-left: 5px;
     height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
 }

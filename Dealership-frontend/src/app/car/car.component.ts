@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Car } from '../carclass/car';
 import { InventoryService } from '../inventory.service';
+import { LoginService } from '../login.service';
 
 @Component({
   selector: 'app-car',
@@ -12,9 +13,13 @@ import { InventoryService } from '../inventory.service';
 export class CarComponent implements OnInit {
   @Input() car : Car | undefined;
   price : any | undefined;
+  loggedIn : boolean;
   
 
-  constructor(private http: HttpClient, private service: InventoryService, private router : Router, private route: ActivatedRoute) {   }
+  constructor(private http: HttpClient, private service: InventoryService, private router : Router, private route: ActivatedRoute,
+              private log : LoginService) {  
+                this.loggedIn = this.log.getStatus();
+               }
 
   ngOnInit(): void {
     this.price =  this.car.price.toLocaleString("en-US");

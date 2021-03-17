@@ -122,7 +122,7 @@ public class DealerPostgresDao implements DealerDao{
         Integer modelId = addOrRetrieveModel(toAdd.getModel());
         existOrAddMakeModel(makeId,modelId);
         Integer id = template.queryForObject("UPDATE public.\"car collection\"\n" +
-                        "\tSET make=?, model=?, miles=?, color=?, year=?, owners=?, passinspec=?, vin=?, price=?,description=?, \"imagePath\"=?\n" +
+                        "\tSET makeid=?, modelid=?, miles=?, color=?, year=?, owners=?, passinspec=?, vin=?, price=?,description=?, \"imagePath\"=?\n" +
                         "\tWHERE id= ? RETURNING \"id\";", new CarIdMapper(), makeId, modelId, toAdd.getMiles(), toAdd.getColor(),
                 toAdd.getYear(),toAdd.getOwners(),toAdd.isPassedInspec(),toAdd.getVin(), toAdd.getPrice(), toAdd.getDescription(), toAdd.getImagePath() ,toAdd.getId());
         return toAdd;

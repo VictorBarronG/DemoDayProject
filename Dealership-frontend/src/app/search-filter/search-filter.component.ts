@@ -35,7 +35,6 @@ export class SearchFilterComponent implements OnInit {
   ngOnInit(): void {
     this.service.getMakes().subscribe(list => {this.makes = list;
       let params : searchParameters = this.searchPara.getSearch();
-      console.log(params)
       if(params){
         this.make = params.make;
         this.model = params.model;
